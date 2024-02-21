@@ -1,0 +1,9 @@
+
+["core.dirman"] = {
+  config = {
+    workspaces = {
+      general = "~/storage/downloads/Norg/",
+      life = "~/storage/downloads/Norg/Life/",
+      work = "~/storage/downloads/Norg/Study/",
+      journal = "~/storage/downloads/Norg/Journal/",
+    },
