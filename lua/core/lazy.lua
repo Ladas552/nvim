@@ -20,68 +20,6 @@ require("lazy").setup({
       require 'catppuccin' .load()
     end
   },
-  {  "nvim-tree/nvim-tree.lua",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    event = 'VeryLazy',
-    config = function()
-      local nvimtree = require("nvim-tree")
-
-      -- recommended settings from nvim-tree documentation
-      vim.g.loaded_netrw = 1
-      vim.g.loaded_netrwPlugin = 1
-
-      -- change color for arrows in tree to light blue
-      vim.cmd([[ highlight NvimTreeFolderArrowClosed guifg=#3dc5ff ]])
-      vim.cmd([[ highlight NvimTreeFolderArrowOpen guifg=#3FC5FF ]])
-
-      -- configure nvim-tree
-      nvimtree.setup({
-        view = {
-          width = 35,
-          relativenumber = true,
-        },
-        -- change folder arrow icons
-        renderer = {
-          indent_markers = {
-            enable = true,
-          },
-          icons = {
-            glyphs = {
-              folder = {
-                arrow_closed = "", -- arrow when folder is closed
-                arrow_open = "", -- arrow when folder is open
-              },
-            },
-          },
-        },
-        -- disable window_picker for
-        -- explorer to work well with
-        -- window splits
-        actions = {
-          open_file = {
-            window_picker = {
-              enable = false,
-            },
-          },
-        },
-        filters = {
-          custom = { ".DS_Store" },
-        },
-        git = {
-          ignore = false,
-        },
-      })
-
-      -- set keymaps
-      local keymap = vim.keymap -- for conciseness
-
-      keymap.set("n", "<leader>ee", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" }) -- toggle file explorer
-      keymap.set("n", "<leader>et", "<cmd>NvimTreeFindFileToggle<CR>", { desc = "Toggle file explorer on current file" }) -- toggle file explorer on current file
-      keymap.set("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>", { desc = "Collapse file explorer" }) -- collapse file explorer
-      keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" }) -- refresh file explorer
-    end,
-    opts = {}
-  },
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -152,6 +90,24 @@ require("lazy").setup({
     end,
   },
   {
+    'stevearc/oil.nvim',
+    opts = {},
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("oil").setup({
+        delete_to_trash = true,
+        keymaps = {
+          ["<BS>"] = "actions.parent",
+          ["<C-Return>"] = "actions.open_external",
+        },
+        view_options = {
+          show_hidden = true,
+        },
+      })
+    end,
+  },
+  {
     'nativerv/cyrillic.nvim',
     event = { 'VeryLazy' },
     config = function()
@@ -190,17 +146,17 @@ require("lazy").setup({
     end,
   },
   {
-	"chrisgrieser/nvim-scissors",
-	dependencies = "nvim-telescope/telescope.nvim", 
-	opts = {
+    "chrisgrieser/nvim-scissors",
+    dependencies = "nvim-telescope/telescope.nvim", 
+    opts = {
       snippetDir = "~/.config/nvim/lua/scissors",
-   } 
+    } 
   },
   {
     "nvim-neorg/neorg",
     build = ":Neorg sync-parsers",
     dependencies = { "nvim-lua/plenary.nvim" },
-   -- event = "VeryLazy",
+    -- event = "VeryLazy",
     event = 'VeryLazy',
     ft = 'norg',
     config = function()
@@ -247,8 +203,8 @@ require("lazy").setup({
   {
     "kelly-lin/ranger.nvim",
     config = function()
-      require("ranger-nvim").setup({ replace_netrw = true })
-      vim.api.nvim_set_keymap("n", "<leader>ef", "", {
+      require("ranger-nvim").setup({ replace_netrw = false })
+      vim.api.nvim_set_keymap("n", "<leader>ee", "", {
         noremap = true,
         callback = function()
           require("ranger-nvim").open(true)
@@ -342,20 +298,20 @@ require("lazy").setup({
     config = function()
       local ccc = require("ccc")
       ccc.setup {
-      highlighter = {
-        auto_enable = true,
+        highlighter = {
+          auto_enable = true,
         },
       }
-      end
+    end
   },
---  {
---    "stevearc/dressing.nvim",
---    config = function()
---      require("dressing").setup{
---
---      }
---    end,
---  },
+  --  {
+  --    "stevearc/dressing.nvim",
+  --    config = function()
+  --      require("dressing").setup{
+  --
+  --      }
+  --    end,
+  --  },
   {
     'nvimdev/dashboard-nvim',
     event = 'VimEnter',
@@ -402,8 +358,8 @@ require("lazy").setup({
   {
     "Exafunction/codeium.nvim",
     dependencies = {
-        "nvim-lua/plenary.nvim",
-        "hrsh7th/nvim-cmp",
+      "nvim-lua/plenary.nvim",
+      "hrsh7th/nvim-cmp",
     },
     ft={
       'python',
@@ -411,8 +367,8 @@ require("lazy").setup({
       'lua',
     },
     config = function()
-        require("codeium").setup({
-        })
+      require("codeium").setup({
+      })
     end
   },
   {

@@ -22,3 +22,5 @@ keymap.set("n", "<leader>jT", "<cmd>Neorg journal tomorrow<CR>", { desc = "Plan 
 -- Scissors Snippets
 keymap.set("n", "<leader>se", function() require("scissors").editSnippet() end)
 keymap.set({"n", "x"}, "<leader>sa", function() require("scissors").addNewSnippet() end)
+
+vim.keymap.set("n", "<leader>ef", "<CMD>Oil<CR>", { desc = "Open parent directory" })
