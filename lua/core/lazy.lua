@@ -152,15 +152,67 @@ require("lazy").setup({
       snippetDir = "~/.config/nvim/lua/scissors",
     } 
   },
+  --  {
+  --    "nvim-neorg/neorg",
+  --    build = ":Neorg sync-parsers",
+  --    dependencies = { "nvim-lua/plenary.nvim" },
+  --    -- event = "VeryLazy",
+  --    event = 'VeryLazy',
+  --    ft = 'norg',
+  --    config = function()
+  --      require("neorg").setup {
+  --        load = {
+  --          ["core.defaults"] = {},
+  --          ["core.concealer"] = {
+  --            config = {
+  --              icon_preset = "diamond",
+  --            },
+  --          },
+  --          ["core.summary"] = {},
+  --          ["core.esupports.metagen"] = { config = { timezone = "implicit-local", type = "empty" } },
+  --          ["core.completion"] = { config = { engine = "nvim-cmp", name = "[Norg]" } },
+  --          ["core.keybinds"] = {
+  --            config = {
+  --              default_keybinds = true,
+  --              neorg_leader = "<Leader><Leader>",
+  --            },
+  --          },
+  --          ["core.journal"] = {
+  --            config = {
+  --              workspace = "journal",
+  --            },
+  --          },
+  --          ["core.dirman"] = {
+  --            config = {
+  --              workspaces = {
+  --                general = "~/Documents/Norg/",
+  --                life = "~/Documents/Norg/Life/",
+  --                work = "~/Documents/Norg/Study/",
+  --                journal = "~/Documents/Norg/Journal/",
+  --              },
+  --              default_workspace = "general",
+  --            },
+  --          },
+  --        },
+  --      }
+  --
+  --      vim.wo.foldlevel = 99
+  --      vim.wo.conceallevel = 2
+  --    end,
+  --  },
+  {
+    "vhyrro/luarocks.nvim",
+    branch = "more-fixes",
+    config = function()
+      require("luarocks").setup({})
+    end,
+  },
   {
     "nvim-neorg/neorg",
-    build = ":Neorg sync-parsers",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    -- event = "VeryLazy",
-    event = 'VeryLazy',
-    ft = 'norg',
+    branch = "luarocks",
+    dependencies = { "luarocks.nvim" },
     config = function()
-      require("neorg").setup {
+      require("neorg").setup({
         load = {
           ["core.defaults"] = {},
           ["core.concealer"] = {
@@ -194,11 +246,10 @@ require("lazy").setup({
             },
           },
         },
-      }
-
+      })
       vim.wo.foldlevel = 99
       vim.wo.conceallevel = 2
-    end,
+    end
   },
   {
     "kelly-lin/ranger.nvim",
