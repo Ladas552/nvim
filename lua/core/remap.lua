@@ -24,3 +24,6 @@ keymap.set("n", "<leader>se", function() require("scissors").editSnippet() end)
 keymap.set({"n", "x"}, "<leader>sa", function() require("scissors").addNewSnippet() end)
 
 vim.keymap.set("n", "<leader>ef", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
+keymap.set("n", "Y", "<cmd>YoinkSave<CR>", { desc = "Save to Yoink list" })
+keymap.set("n", "<leader>y", "<cmd>YoinkOpen<CR>", { desc = "Open Yoink list" })

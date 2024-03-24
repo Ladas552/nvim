@@ -12,16 +12,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  {
-    "vhyrro/luarocks.nvim",
-    priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
-    config = true,
-    opts = {
-      luarocks_build_args = {
-        "--with-lua-include=/usr/include",
-      },
-    },
-  },
   {'catppuccin/nvim',
     lazy = false,
     priority = 1000,
@@ -162,8 +152,64 @@ require("lazy").setup({
       snippetDir = "~/.config/nvim/lua/scissors",
     } 
   },
+  --  {
+  --    "nvim-neorg/neorg",
+  --    build = ":Neorg sync-parsers",
+  --    dependencies = { "nvim-lua/plenary.nvim" },
+  --    -- event = "VeryLazy",
+  --    event = 'VeryLazy',
+  --    ft = 'norg',
+  --    config = function()
+  --      require("neorg").setup {
+  --        load = {
+  --          ["core.defaults"] = {},
+  --          ["core.concealer"] = {
+  --            config = {
+  --              icon_preset = "diamond",
+  --            },
+  --          },
+  --          ["core.summary"] = {},
+  --          ["core.esupports.metagen"] = { config = { timezone = "implicit-local", type = "empty" } },
+  --          ["core.completion"] = { config = { engine = "nvim-cmp", name = "[Norg]" } },
+  --          ["core.keybinds"] = {
+  --            config = {
+  --              default_keybinds = true,
+  --              neorg_leader = "<Leader><Leader>",
+  --            },
+  --          },
+  --          ["core.journal"] = {
+  --            config = {
+  --              workspace = "journal",
+  --            },
+  --          },
+  --          ["core.dirman"] = {
+  --            config = {
+  --              workspaces = {
+  --                general = "~/Documents/Norg/",
+  --                life = "~/Documents/Norg/Life/",
+  --                work = "~/Documents/Norg/Study/",
+  --                journal = "~/Documents/Norg/Journal/",
+  --              },
+  --              default_workspace = "general",
+  --            },
+  --          },
+  --        },
+  --      }
+  --
+  --      vim.wo.foldlevel = 99
+  --      vim.wo.conceallevel = 2
+  --    end,
+  --  },
+  {
+    "vhyrro/luarocks.nvim",
+    branch = "go-away-python",
+    config = function()
+      require("luarocks").setup({})
+    end,
+  },
   {
     "nvim-neorg/neorg",
+    branch = "luarocks",
     dependencies = { "luarocks.nvim" },
     config = function()
       require("neorg").setup({
