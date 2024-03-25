@@ -12,6 +12,16 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+  {
+    "vhyrro/luarocks.nvim",
+    priority = 1000, -- Very high priority is required, luarocks.nvim should run as the first plugin in your config.
+    config = true,
+    opts = {
+      luarocks_build_args = {
+        "--with-lua-include=/data/data/com.termux/files/usr/include",
+      },
+    },
+  },
   {'catppuccin/nvim',
     lazy = false,
     priority = 1000,
@@ -154,7 +164,7 @@ require("lazy").setup({
   },
   {
     "nvim-neorg/neorg",
-    version = "v7.0.0",
+    dependencies = { "luarocks.nvim" },
     config = function()
       require("neorg").setup({
         load = {
